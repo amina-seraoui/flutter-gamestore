@@ -9,53 +9,52 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
+      body: Container(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color(0xFF5F67EA),
-                Color(0xFF5F67EA),
-                Color(0xFFE8E8E8),
-              ]
-            )
-          ),
-          child: SingleChildScrollView(
-            child: Stack(
-              children: [
-                Transform(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+              Color(0xFF5F67EA),
+              Color(0xFF5F67EA),
+              Color(0xFFE8E8E8),
+            ])),
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Transform(
+                transform: Matrix4.identity()..rotateZ(20),
+                origin: const Offset(150, 50),
+                child: Image.asset(
+                  'assets/images/bg_liquid.png',
+                  width: 200,
+                ),
+              ),
+              Positioned(
+                right: 0,
+                top: 200,
+                child: Transform(
                   transform: Matrix4.identity()..rotateZ(20),
-                  origin: const Offset(150, 50),
+                  origin: const Offset(150, 100),
                   child: Image.asset(
                     'assets/images/bg_liquid.png',
                     width: 200,
                   ),
                 ),
-                Positioned(
-                  right: 0,
-                  top: 200,
-                  child: Transform(
-                    transform: Matrix4.identity()..rotateZ(20),
-                    origin: const Offset(150, 100),
-                    child: Image.asset(
-                      'assets/images/bg_liquid.png',
-                      width: 200,
-                    ),
-                  ),
-                ),
-                Column(
-                  children: [
-                    const HeaderSection(),
-                    const SearchSection(),
-                    CategorySection(),
-                  ],
-                )
-              ],
-            ),
+              ),
+              Column(
+                children: [
+                  const HeaderSection(),
+                  const SearchSection(),
+                  CategorySection(),
+                ],
+              ),
+            ],
           ),
         ),
-        bottomNavigationBar: NavigationBar());
+      ),
+      bottomNavigationBar: NavigationBar(),
+    );
   }
 }
 

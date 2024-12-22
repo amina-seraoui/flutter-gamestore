@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamestore/models/game.dart';
+import 'package:gamestore/pages/details/details.dart';
 
 class PopularSection extends StatelessWidget {
   PopularSection({super.key});
@@ -14,7 +15,7 @@ class PopularSection extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         scrollDirection: Axis.horizontal,
         itemBuilder: ((context, index) => GestureDetector(
-              onTap: () => print('on tap'),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: ((context) => DetailsPage(games[index])))),
               child: Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(
