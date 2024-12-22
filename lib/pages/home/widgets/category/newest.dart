@@ -48,6 +48,7 @@ class NewestSection extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       game.type,
@@ -55,45 +56,28 @@ class NewestSection extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.8),
                                       ),
                                     ),
-                                    const Row(
+                                    Row(
                                       children: [
-                                        Icon(
-                                          Icons.star,
-                                          size: 15,
-                                          color: Colors.amber,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 15,
-                                          color: Colors.amber,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 15,
-                                          color: Colors.amber,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 15,
-                                          color: Colors.amber,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 15,
-                                          color: Colors.amber,
-                                        ),
+                                        for (var i = 0; i < 5; i++)
+                                          Icon(
+                                            Icons.star_rounded,
+                                            color: game.score >= i + 1
+                                                ? Colors.amber
+                                                : Colors.grey.withOpacity(0.3),
+                                            size: 15,
+                                          ),
                                       ],
                                     ), // Stars
                                   ],
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 5,
-                                    horizontal: 15,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF768FF3),
-                                    borderRadius: BorderRadius.circular(15),
+                                ElevatedButton(
+                                  onPressed: () => {},
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor: const Color(0xFF768FF3),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
                                   ),
                                   child: const Text(
                                     'Installer',
