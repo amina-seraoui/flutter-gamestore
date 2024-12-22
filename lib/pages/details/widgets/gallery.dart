@@ -18,9 +18,60 @@ class GallerySection extends StatelessWidget {
             width: 250,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                game.images[index],
-                fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: () async => await showGeneralDialog(
+                  context: context,
+                  transitionBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    final TransformationController viewController =
+                        TransformationController();
+                    Matrix4 initialValue = Matrix4.identity();
+                    return Transform.scale(
+                      scale: animation.value,
+                      child: Opacity(
+                        opacity: animation.value,
+                        child: Dialog(
+                          insetPadding: const EdgeInsets.all(10),
+                          clipBehavior: Clip.antiAlias,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: GestureDetector(
+                            onVerticalDragEnd: (_) =>
+                                Navigator.of(context).pop(),
+                            child: InteractiveViewer(
+                              maxScale: 2,
+                              minScale: 0.3,
+                              trackpadScrollCausesScale: true,
+                              transformationController: viewController,
+                              onInteractionStart: (details) {
+                                initialValue = viewController.value;
+                              },
+                              onInteractionEnd: (details) {
+                                viewController.value = initialValue;
+                              },
+                              // transformationController: _transformationController,
+                              child: Image.asset(
+                                game.images[index],
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  transitionDuration: const Duration(milliseconds: 200),
+                  pageBuilder: (context, a, b) {
+                    return const SizedBox();
+                  },
+                  barrierDismissible: true,
+                  barrierLabel: '',
+                ),
+                child: Image.asset(
+                  game.images[index],
+                  fit: BoxFit.cover,
+                ),
               ),
             )),
         separatorBuilder: (context, index) => const SizedBox(width: 15),
